@@ -1,0 +1,36 @@
+{
+  "name": "2FA.tools — TOTP Generator",
+  "short_name": "2FA.tools",
+  "description": "Generate time-based 2FA codes instantly. 100% private — your keys never leave your device.",
+  "start_url": "/2fa-tools/",
+  "scope": "/2fa-tools/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#111111",
+  "theme_color": "#111111",
+  "lang": "en",
+  "categories": ["utilities", "security", "productivity"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23111111'/%3E%3Crect x='42' y='48' width='108' height='18' rx='9' fill='white'/%3E%3Crect x='42' y='87' width='108' height='18' rx='9' fill='white'/%3E%3Crect x='42' y='126' width='66' height='18' rx='9' fill='white'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%23111111'/%3E%3Crect x='112' y='128' width='288' height='48' rx='24' fill='white'/%3E%3Crect x='112' y='232' width='288' height='48' rx='24' fill='white'/%3E%3Crect x='112' y='336' width='176' height='48' rx='24' fill='white'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Generate Code",
+      "short_name": "Generate",
+      "description": "Open 2FA.tools and generate a code",
+      "url": "/2fa-tools/"
+    }
+  ]
+}
