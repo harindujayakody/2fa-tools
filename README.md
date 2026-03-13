@@ -186,6 +186,13 @@ open index.html
 
 ---
 
+## 📷 Screenshots
+
+[<img width="680" alt="2FA.tools screenshot" src="https://harindujayakody.github.io/2fa-tools/screenshots/splash.png"/>](https://harindujayakody.github.io/2fa-tools/screenshots/splash.png)
+
+[<img width="680" alt="2FA.tools screenshot" src="https://harindujayakody.github.io/2fa-tools/screenshots/splash.png"/>](https://harindujayakody.github.io/2fa-tools/screenshots/app.png)
+---
+
 ## 🤝 Compatible With
 
 Any service that uses standard **TOTP (RFC 6238)** authentication, including:
