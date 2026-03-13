@@ -13,7 +13,7 @@
 <meta name="robots" content="index, follow"/>
 <meta name="theme-color" content="#ffffff" id="themeColorMeta"/>
 
-<!-- Open Graph / Facebook -->
+<!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://harindujayakody.github.io/2fa-tools/"/>
 <meta property="og:title" content="2FA.tools — Free Online TOTP Code Generator"/>
@@ -28,10 +28,9 @@
 <meta name="twitter:image" content="https://harindujayakody.github.io/2fa-tools/og-image.png"/>
 <meta name="twitter:creator" content="@harindujayakody"/>
 
-<!-- Canonical -->
 <link rel="canonical" href="https://harindujayakody.github.io/2fa-tools/"/>
 
-<!-- Favicon (inline SVG-based, works everywhere) -->
+<!-- Favicon (inline SVG, no external file needed) -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='14.5' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='21' width='11' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E"/>
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='14.5' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='21' width='11' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E"/>
 
@@ -44,40 +43,41 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:            #ffffff;
-  --bg-secondary:  #f7f7f5;
-  --bg-tertiary:   #efefed;
-  --text:          #111111;
-  --text-secondary:#666666;
-  --text-tertiary: #999999;
-  --border:        rgba(0,0,0,0.09);
-  --border-hover:  rgba(0,0,0,0.18);
-  --accent:        #111111;
-  --accent-text:   #ffffff;
-  --green:         #1D9E75;
-  --amber:         #BA7517;
-  --red:           #E24B4A;
-  --radius-sm:     6px;
-  --radius-md:     10px;
-  --radius-lg:     14px;
-  --shadow-sm:     0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
-  --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono:     'JetBrains Mono', 'SF Mono', monospace;
-  --transition:    0.2s ease;
+  --bg:             #ffffff;
+  --bg-secondary:   #f7f7f5;
+  --bg-tertiary:    #efefed;
+  --text:           #111111;
+  --text-secondary: #666666;
+  --text-tertiary:  #999999;
+  --border:         rgba(0,0,0,0.09);
+  --border-hover:   rgba(0,0,0,0.18);
+  --accent:         #111111;
+  --accent-text:    #ffffff;
+  --green:          #1D9E75;
+  --amber:          #BA7517;
+  --red:            #E24B4A;
+  --nav-h:          60px;
+  --radius-sm:      6px;
+  --radius-md:      10px;
+  --radius-lg:      14px;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --font-sans:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:      'JetBrains Mono', 'SF Mono', monospace;
+  --transition:     0.2s ease;
 }
 
 [data-theme="dark"] {
-  --bg:            #111111;
-  --bg-secondary:  #1a1a1a;
-  --bg-tertiary:   #222222;
-  --text:          #f0f0f0;
-  --text-secondary:#888888;
-  --text-tertiary: #555555;
-  --border:        rgba(255,255,255,0.08);
-  --border-hover:  rgba(255,255,255,0.16);
-  --accent:        #f0f0f0;
-  --accent-text:   #111111;
-  --shadow-sm:     0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --bg:             #111111;
+  --bg-secondary:   #1a1a1a;
+  --bg-tertiary:    #222222;
+  --text:           #f0f0f0;
+  --text-secondary: #888888;
+  --text-tertiary:  #555555;
+  --border:         rgba(255,255,255,0.08);
+  --border-hover:   rgba(255,255,255,0.16);
+  --accent:         #f0f0f0;
+  --accent-text:    #111111;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
 }
 
 html { scroll-behavior: smooth; }
@@ -94,16 +94,37 @@ body {
   transition: background var(--transition), color var(--transition);
 }
 
-/* ── Layout ── */
-.page { flex: 1; padding: 40px 16px 60px; }
-.container { max-width: 640px; margin: 0 auto; }
+/* ═══ STICKY HEADER ═══ */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
 
-/* ── Nav ── */
+header.scrolled {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme="dark"] header.scrolled {
+  background: rgba(17,17,17,0.92);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+}
+
 nav {
+  max-width: 640px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 48px;
 }
 
 .logo {
@@ -118,9 +139,8 @@ nav {
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
   transition: background var(--transition);
+  flex-shrink: 0;
 }
-
-.logo-badge svg { display: block; }
 
 .nav-actions { display: flex; align-items: center; gap: 8px; }
 
@@ -128,7 +148,7 @@ nav {
   width: 34px; height: 34px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  background: var(--bg);
+  background: transparent;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   color: var(--text-secondary);
@@ -142,10 +162,14 @@ nav {
   background: var(--bg-tertiary);
 }
 
-/* ── Header ── */
-.header { margin-bottom: 32px; }
+/* ═══ PAGE ═══ */
+.page { flex: 1; padding: 48px 16px 64px; }
+.container { max-width: 640px; margin: 0 auto; }
 
-.badge {
+/* ─── Hero ─── */
+.hero { margin-bottom: 36px; }
+
+.live-badge {
   display: inline-flex; align-items: center; gap: 6px;
   font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
   color: var(--text-secondary);
@@ -153,79 +177,61 @@ nav {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 3px 10px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   text-transform: uppercase;
+  user-select: none;
 }
 
-.badge-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
   background: var(--green);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  50% { opacity: 0.35; }
 }
 
 h1 {
-  font-size: 30px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: -0.6px;
-  line-height: 1.2;
-  margin-bottom: 8px;
+  font-size: 30px; font-weight: 600;
+  color: var(--text); letter-spacing: -0.6px;
+  line-height: 1.2; margin-bottom: 8px;
 }
 
 .subtitle {
-  font-size: 15px;
-  color: var(--text-secondary);
-  font-weight: 400;
+  font-size: 15px; color: var(--text-secondary);
+  font-weight: 400; max-width: 480px;
 }
 
-/* ── Card ── */
+/* ─── Card ─── */
 .card {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   transition: background var(--transition), border-color var(--transition);
 }
 
-/* ── Form ── */
 .field-label {
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 8px;
+  display: block; font-size: 13px; font-weight: 500;
+  color: var(--text); margin-bottom: 8px;
 }
 
 textarea {
-  width: 100%;
-  font-size: 13px;
-  font-family: var(--font-mono);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 12px 14px;
-  color: var(--text);
-  background: var(--bg-secondary);
-  resize: vertical;
-  outline: none;
-  line-height: 1.7;
-  min-height: 100px;
+  width: 100%; font-size: 13px; font-family: var(--font-mono);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 12px 14px; color: var(--text); background: var(--bg-secondary);
+  resize: vertical; outline: none; line-height: 1.7; min-height: 100px;
   transition: border-color var(--transition), background var(--transition);
 }
-
 textarea::placeholder { color: var(--text-tertiary); }
 textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 
 .hint {
-  font-size: 12px;
-  color: var(--text-tertiary);
+  font-size: 12px; color: var(--text-tertiary);
   margin: 6px 0 20px;
   display: flex; align-items: center; gap: 5px;
 }
@@ -233,37 +239,24 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 .btn-row { display: flex; justify-content: flex-end; }
 
 .btn-primary {
-  background: var(--accent);
-  color: var(--accent-text);
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 10px 22px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: var(--font-sans);
-  letter-spacing: -0.1px;
-  transition: opacity var(--transition), transform 0.1s;
+  background: var(--accent); color: var(--accent-text);
+  border: none; border-radius: var(--radius-md);
+  padding: 10px 20px; font-size: 13px; font-weight: 500;
+  cursor: pointer; font-family: var(--font-sans);
   display: flex; align-items: center; gap: 7px;
+  transition: opacity var(--transition), transform 0.1s;
 }
-
 .btn-primary:hover { opacity: 0.82; }
 .btn-primary:active { transform: scale(0.98); }
 
-/* ── Results ── */
+/* ─── Results ─── */
 #results { margin-bottom: 4px; }
 
 .result-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  margin-bottom: 10px;
-  background: var(--bg);
-  gap: 12px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border: 1px solid var(--border);
+  border-radius: var(--radius-md); margin-bottom: 10px;
+  background: var(--bg); gap: 12px; flex-wrap: wrap;
   box-shadow: var(--shadow-sm);
   transition: border-color var(--transition);
   animation: slideIn 0.2s ease;
@@ -271,7 +264,7 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 
 @keyframes slideIn {
   from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .result-row:hover { border-color: var(--border-hover); }
@@ -279,44 +272,32 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 .key-info { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
 
 .key-icon {
-  width: 30px; height: 30px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: var(--radius-sm);
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
 }
 
 .key-label {
-  font-size: 12px;
-  font-family: var(--font-mono);
+  font-size: 12px; font-family: var(--font-mono);
   color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
 .code-area { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 
 .code {
-  font-size: 22px;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 4px;
+  font-size: 22px; font-family: var(--font-mono);
+  font-weight: 600; color: var(--text); letter-spacing: 4px;
 }
 
 .copy-btn {
   width: 30px; height: 30px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: var(--bg-secondary);
-  cursor: pointer;
+  border: 1px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg-secondary); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: border-color var(--transition), background var(--transition);
   flex-shrink: 0;
 }
-
 .copy-btn:hover { border-color: var(--border-hover); background: var(--bg-tertiary); }
 .copy-btn svg { stroke: var(--text-secondary); display: block; }
 
@@ -324,184 +305,174 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 .timer-num {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 9px;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  color: var(--text);
+  font-size: 9px; font-family: var(--font-mono); font-weight: 600; color: var(--text);
 }
 
-/* ── Security note ── */
+/* ─── Security note ─── */
 .security-note {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  display: flex; gap: 10px; align-items: flex-start;
   padding: 12px 16px;
-  background: var(--bg-tertiary);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  margin-top: 4px;
+  background: var(--bg-tertiary); border-radius: var(--radius-md);
+  border: 1px solid var(--border); margin-top: 4px;
 }
+.security-note p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 
-.security-note p {
-  font-size: 12px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-}
+/* ─── FAQ ─── */
+.faq-section { margin-top: 36px; }
+.faq-heading { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 16px; letter-spacing: -0.2px; }
 
-/* ── FAQ ── */
-.faq-section { margin-top: 32px; }
-.faq-heading {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 4px;
-  letter-spacing: -0.2px;
-}
-
-.faq-item {
-  border-bottom: 1px solid var(--border);
-}
-
+.faq-item { border-bottom: 1px solid var(--border); }
 .faq-item:first-of-type { border-top: 1px solid var(--border); }
 
 .faq-btn {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: none;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  padding: 14px 0;
-  font-family: var(--font-sans);
-  gap: 16px;
+  width: 100%; display: flex; justify-content: space-between; align-items: center;
+  background: none; border: none; cursor: pointer;
+  text-align: left; padding: 14px 0; font-family: var(--font-sans); gap: 16px;
 }
 
-.faq-q {
-  font-size: 13.5px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.4;
-}
+.faq-q { font-size: 13.5px; font-weight: 500; color: var(--text); line-height: 1.4; }
 
 .faq-chevron {
-  flex-shrink: 0;
-  width: 18px; height: 18px;
-  color: var(--text-tertiary);
+  flex-shrink: 0; width: 18px; height: 18px; color: var(--text-tertiary);
   transition: transform 0.2s ease, color 0.2s;
 }
-
-.faq-item.open .faq-chevron {
-  transform: rotate(180deg);
-  color: var(--text-secondary);
-}
+.faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--text-secondary); }
 
 .faq-body {
-  display: none;
-  font-size: 13px;
-  color: var(--text-secondary);
-  padding-bottom: 14px;
-  line-height: 1.65;
-  max-width: 90%;
+  display: none; font-size: 13px; color: var(--text-secondary);
+  padding-bottom: 14px; line-height: 1.65; max-width: 92%;
 }
-
 .faq-item.open .faq-body { display: block; }
 
-/* ── Footer ── */
+/* ═══ FOOTER ═══ */
 footer {
   border-top: 1px solid var(--border);
-  padding: 24px 16px;
-  text-align: center;
-  transition: border-color var(--transition);
+  padding: 36px 16px 28px;
+  background: var(--bg);
+  transition: border-color var(--transition), background var(--transition);
 }
 
-.footer-inner {
-  max-width: 640px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+.footer-inner { max-width: 640px; margin: 0 auto; }
+
+.footer-credits-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px;
+}
+
+.footer-credits-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 480px) {
+  .footer-credits-grid { grid-template-columns: 1fr; }
+}
+
+/* Creator card */
+.credit-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+}
+.credit-card:hover {
+  border-color: var(--border-hover);
+  background: var(--bg-tertiary);
+  box-shadow: var(--shadow-sm);
+}
+
+.avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+}
+
+.claude-avatar {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: #D97706;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.credit-info { min-width: 0; }
+.credit-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.credit-sub  { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+
+/* Footer bottom bar */
+.footer-bottom {
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
 }
 
 .footer-made {
-  font-size: 13px;
-  color: var(--text-tertiary);
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  font-size: 12px; color: var(--text-tertiary);
+  display: flex; align-items: center; gap: 4px;
 }
 
 .heart {
-  color: #E24B4A;
-  font-size: 14px;
+  color: var(--red); display: inline-block;
   animation: heartbeat 1.4s ease infinite;
 }
 
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.25); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.18); }
-  56% { transform: scale(1); }
+  14%       { transform: scale(1.3); }
+  28%       { transform: scale(1); }
+  42%       { transform: scale(1.18); }
+  56%       { transform: scale(1); }
 }
+
+.footer-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 
 .footer-link {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  text-decoration: none;
+  font-size: 12px; color: var(--text-tertiary); text-decoration: none;
+  display: flex; align-items: center; gap: 4px;
   transition: color var(--transition);
 }
+.footer-link:hover { color: var(--text-secondary); }
 
-.footer-link:hover { color: var(--text); }
+.footer-dot { color: var(--text-tertiary); font-size: 10px; }
 
-.footer-meta {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  margin-top: 2px;
-}
-
-/* ── Toast ── */
+/* ─── Toast ─── */
 .toast {
-  position: fixed;
-  bottom: 28px; left: 50%;
+  position: fixed; bottom: 28px; left: 50%;
   transform: translateX(-50%) translateY(8px);
-  background: var(--text);
-  color: var(--accent-text);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 9px 22px;
-  border-radius: 30px;
-  opacity: 0;
-  transition: opacity 0.25s, transform 0.25s;
-  pointer-events: none;
-  white-space: nowrap;
+  background: var(--text); color: var(--accent-text);
+  font-size: 13px; font-weight: 500;
+  padding: 9px 22px; border-radius: 30px;
+  opacity: 0; transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none; white-space: nowrap;
   font-family: var(--font-sans);
   box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-  z-index: 100;
+  z-index: 200;
 }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* ── Responsive ── */
+/* ─── Responsive ─── */
 @media (max-width: 480px) {
   h1 { font-size: 24px; }
   .code { font-size: 18px; }
   .card { padding: 18px; }
+  nav { padding: 0 12px; }
 }
 </style>
 </head>
-
 <body>
-<div class="page">
-<div class="container">
 
-  <!-- Nav -->
+<!-- ═══ STICKY HEADER ═══ -->
+<header id="siteHeader">
   <nav>
     <a class="logo" href="#">
       <div class="logo-badge">
@@ -513,16 +484,18 @@ footer {
       2FA.tools
     </a>
     <div class="nav-actions">
-      <!-- GitHub -->
       <a class="icon-btn" href="https://github.com/harindujayakody/2fa-tools" target="_blank" rel="noopener" title="View on GitHub" aria-label="GitHub">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
         </svg>
       </a>
-      <!-- Theme toggle -->
-      <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle dark/light mode" aria-label="Toggle theme">
+      <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark/light mode">
         <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </svg>
         <svg id="iconMoon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -530,102 +503,140 @@ footer {
       </button>
     </div>
   </nav>
+</header>
 
-  <!-- Header -->
-  <div class="header">
-    <div class="badge">
-      <span class="badge-dot"></span>
-      100% local · no server
-    </div>
+<!-- ═══ MAIN PAGE ═══ -->
+<div class="page">
+<div class="container">
+
+  <div class="hero">
+    <div class="live-badge"><span class="live-dot"></span>100% local · no server</div>
     <h1>Get 2FA codes<br>in seconds</h1>
     <p class="subtitle">Enter your secret key and instantly generate a time-based one-time password — right in your browser.</p>
   </div>
 
-  <!-- Input card -->
   <div class="card">
     <label class="field-label" for="secretKeys">Enter 2FA secret keys</label>
     <textarea id="secretKeys" rows="4" placeholder="NATJHQ2EMKEL6ZSHWXKQGOSM6B7YSFQ&#10;JBSWY3DPEHPK3PXP&#10;&#10;One key per line → one code per key"></textarea>
     <p class="hint">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Each key on a separate line will receive one code.
+      Each key on a separate line. Press Ctrl+Enter to generate.
     </p>
     <div class="btn-row">
       <button class="btn-primary" onclick="generateCodes()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="13 2 13 9 20 9"/><path d="M20 14.5V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h7.5"/><polyline points="16 2 22 8"/></svg>
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
         Get 2FA codes
       </button>
     </div>
   </div>
 
-  <!-- Results -->
   <div id="results"></div>
 
-  <!-- Security note -->
   <div class="security-note">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;color:var(--green)"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-    <p>Your secret key <strong>never leaves your device</strong>. All TOTP computation happens locally using the Web Crypto API — nothing is transmitted to any server.</p>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;color:var(--green)">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+    <p>Your secret key <strong>never leaves your device</strong>. All TOTP computation happens locally using the browser's native Web Crypto API — nothing is transmitted to any server.</p>
   </div>
 
-  <!-- FAQ -->
   <div class="faq-section">
-    <p class="faq-heading" style="margin-bottom:16px;">Frequently asked questions</p>
+    <p class="faq-heading">Frequently asked questions</p>
     <div id="faq"></div>
   </div>
 
 </div>
 </div>
 
-<!-- Footer -->
+<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-inner">
-    <p class="footer-made">
-      Made with <span class="heart">♥</span> by
-      <a class="footer-link" href="https://github.com/harindujayakody" target="_blank" rel="noopener">Harindu Jayakody</a>
-    </p>
-    <a class="footer-link" href="https://github.com/harindujayakody/2fa-tools" target="_blank" rel="noopener" style="font-size:12px;color:var(--text-tertiary);display:flex;align-items:center;gap:5px;">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-      github.com/harindujayakody/2fa-tools
-    </a>
-    <p class="footer-meta">Open source · MIT License · No tracking · No cookies</p>
+
+    <p class="footer-credits-label">Credits</p>
+    <div class="footer-credits-grid">
+
+      <!-- Creator -->
+      <a class="credit-card" href="https://github.com/harindujayakody" target="_blank" rel="noopener" aria-label="Harindu Jayakody">
+        <div class="avatar">HJ</div>
+        <div class="credit-info">
+          <p class="credit-name">Harindu Jayakody</p>
+          <p class="credit-sub">Creator &amp; Developer</p>
+        </div>
+      </a>
+
+      <!-- Claude -->
+      <a class="credit-card" href="https://www.anthropic.com/claude" target="_blank" rel="noopener" aria-label="Claude Sonnet 4.6 by Anthropic">
+        <div class="claude-avatar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M4 7.5L12 12L20 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="12" y1="12" x2="12" y2="21" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="credit-info">
+          <p class="credit-name">Claude Sonnet 4.6</p>
+          <p class="credit-sub">Built with AI · Anthropic</p>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <p class="footer-made">
+        Made with <span class="heart">♥</span>&nbsp;for the open-source community
+      </p>
+      <div class="footer-links">
+        <a class="footer-link" href="https://github.com/harindujayakody/2fa-tools" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+          </svg>
+          GitHub
+        </a>
+        <span class="footer-dot">·</span>
+        <a class="footer-link" href="https://github.com/harindujayakody/2fa-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+        <span class="footer-dot">·</span>
+        <span style="font-size:12px;color:var(--text-tertiary)">No cookies · No tracking</span>
+      </div>
+    </div>
+
   </div>
 </footer>
 
-<div class="toast" id="toast">Copied to clipboard!</div>
+<div class="toast" id="toast">Copied!</div>
 
 <script>
-/* ── Theme ── */
-(function() {
+/* ── Theme init (before paint) ── */
+(function () {
   const saved = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const theme = saved || (prefersDark ? 'dark' : 'light');
+  const dark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (dark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
   syncThemeIcon(theme);
 })();
 
 function syncThemeIcon(theme) {
-  const sun = document.getElementById('iconSun');
+  const sun  = document.getElementById('iconSun');
   const moon = document.getElementById('iconMoon');
   const meta = document.getElementById('themeColorMeta');
   if (!sun || !moon) return;
-  if (theme === 'dark') {
-    sun.style.display = 'block';
-    moon.style.display = 'none';
-    if (meta) meta.content = '#111111';
-  } else {
-    sun.style.display = 'none';
-    moon.style.display = 'block';
-    if (meta) meta.content = '#ffffff';
-  }
+  sun.style.display  = theme === 'dark' ? 'block' : 'none';
+  moon.style.display = theme === 'dark' ? 'none'  : 'block';
+  if (meta) meta.content = theme === 'dark' ? '#111111' : '#ffffff';
 }
 
 function toggleTheme() {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   syncThemeIcon(next);
 }
+
+/* ── Sticky header shadow on scroll ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 4);
+}, { passive: true });
 
 /* ── FAQ ── */
 const faqs = [
@@ -644,32 +655,28 @@ const faqs = [
 ];
 
 const faqEl = document.getElementById('faq');
-faqs.forEach(([q, a], i) => {
+faqs.forEach(([q, a]) => {
   const item = document.createElement('div');
   item.className = 'faq-item';
   item.innerHTML = `
-    <button class="faq-btn" onclick="toggleFaq(this.parentElement)">
+    <button class="faq-btn" onclick="this.parentElement.classList.toggle('open')">
       <span class="faq-q">${q}</span>
-      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="faq-body">${a}</div>
   `;
   faqEl.appendChild(item);
 });
 
-function toggleFaq(item) {
-  item.classList.toggle('open');
-}
-
 /* ── Toast ── */
 function showToast(msg) {
   const t = document.getElementById('toast');
-  t.textContent = msg || 'Copied to clipboard!';
+  t.textContent = msg || 'Copied!';
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 1800);
 }
 
-/* ── TOTP ── */
+/* ── TOTP (RFC 6238) ── */
 function base32ToBytes(b32) {
   const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
   const s = b32.toUpperCase().replace(/[\s=\-]/g, '');
@@ -688,101 +695,87 @@ function base32ToBytes(b32) {
 async function totp(secret) {
   const keyBytes = base32ToBytes(secret);
   const now = Math.floor(Date.now() / 1000);
-  const c = BigInt(Math.floor(now / 30));
+  const c  = BigInt(Math.floor(now / 30));
   const cb = new Uint8Array(8);
   for (let i = 7; i >= 0; i--) cb[i] = Number((c >> BigInt((7 - i) * 8)) & 0xffn);
-  const cryptoKey = await crypto.subtle.importKey(
-    'raw', keyBytes, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']
-  );
-  const sig = new Uint8Array(await crypto.subtle.sign('HMAC', cryptoKey, cb));
+  const key = await crypto.subtle.importKey('raw', keyBytes, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']);
+  const sig = new Uint8Array(await crypto.subtle.sign('HMAC', key, cb));
   const off = sig[19] & 0x0f;
   const code = (((sig[off] & 0x7f) << 24) | (sig[off+1] << 16) | (sig[off+2] << 8) | sig[off+3]) % 1_000_000;
-  const remaining = 30 - (now % 30);
-  return { code: String(code).padStart(6, '0'), remaining };
+  return { code: String(code).padStart(6, '0'), remaining: 30 - (now % 30) };
 }
 
-/* ── Render ── */
-let timer = null;
+/* ── Render engine ── */
+let ticker = null;
 
 async function generateCodes() {
-  const raw = document.getElementById('secretKeys').value;
-  const keys = raw.split('\n').map(k => k.trim()).filter(Boolean);
+  const keys = document.getElementById('secretKeys').value
+    .split('\n').map(k => k.trim()).filter(Boolean);
   if (!keys.length) return;
-  if (timer) clearInterval(timer);
-  await renderAll(keys);
-  timer = setInterval(() => renderAll(keys), 1000);
+  if (ticker) clearInterval(ticker);
+  await renderAll(keys, true);
+  ticker = setInterval(() => renderAll(keys, false), 1000);
 }
 
-async function renderAll(keys) {
+async function renderAll(keys, force) {
   const res = document.getElementById('results');
-  const isFirst = res.children.length === 0;
   const rows = [];
 
   for (const key of keys) {
     let codeStr = '------', rem = 30;
-    try { const r = await totp(key); codeStr = r.code; rem = r.remaining; } catch(e) {}
-
+    try { ({ code: codeStr, remaining: rem } = await totp(key)); } catch(e) {}
     const clean = key.replace(/[\s=\-]/g, '');
     const label = clean.length > 30 ? clean.slice(0, 30) + '…' : clean;
-    const pct = rem / 30;
-    const arc = (pct * 75.4).toFixed(1);
+    const arc   = ((rem / 30) * 75.4).toFixed(1);
     const color = rem <= 5 ? '#E24B4A' : rem <= 10 ? '#BA7517' : '#1D9E75';
-    const codeSafe = codeStr.replace(/'/g, '');
-
-    rows.push({ label, codeStr, codeSafe, rem, arc, color, isFirst });
+    rows.push({ label, codeStr, rem, arc, color });
   }
 
-  if (isFirst) {
+  if (force || res.children.length !== rows.length) {
     res.innerHTML = '';
-    for (const r of rows) {
-      const row = document.createElement('div');
-      row.className = 'result-row';
-      row.innerHTML = buildRow(r);
-      res.appendChild(row);
-    }
-  } else {
-    const existing = res.querySelectorAll('.result-row');
-    rows.forEach((r, i) => {
-      if (existing[i]) {
-        existing[i].querySelector('.code').textContent = r.codeStr.slice(0,3) + ' ' + r.codeStr.slice(3);
-        existing[i].querySelector('.copy-btn').setAttribute('data-code', r.codeSafe);
-        existing[i].querySelector('.timer-num').textContent = r.rem;
-        const arc2 = existing[i].querySelectorAll('circle')[1];
-        if (arc2) {
-          arc2.setAttribute('stroke-dasharray', r.arc + ' 75.4');
-          arc2.setAttribute('stroke', r.color);
-        }
-      }
+    rows.forEach(r => {
+      const el = document.createElement('div');
+      el.className = 'result-row';
+      el.innerHTML = buildRow(r);
+      res.appendChild(el);
     });
     return;
   }
+
+  const els = res.querySelectorAll('.result-row');
+  rows.forEach((r, i) => {
+    if (!els[i]) return;
+    els[i].querySelector('.code').textContent       = r.codeStr.slice(0,3) + ' ' + r.codeStr.slice(3);
+    els[i].querySelector('.copy-btn').dataset.code  = r.codeStr;
+    els[i].querySelector('.timer-num').textContent  = r.rem;
+    const ring = els[i].querySelectorAll('circle')[1];
+    if (ring) { ring.setAttribute('stroke-dasharray', r.arc + ' 75.4'); ring.setAttribute('stroke', r.color); }
+  });
 }
 
-function buildRow({ label, codeStr, codeSafe, rem, arc, color }) {
+function buildRow({ label, codeStr, rem, arc, color }) {
   return `
     <div class="key-info">
       <div class="key-icon">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
         </svg>
       </div>
       <span class="key-label">${label}</span>
     </div>
     <div class="code-area">
       <span class="code">${codeStr.slice(0,3)} ${codeStr.slice(3)}</span>
-      <button class="copy-btn" data-code="${codeSafe}" onclick="navigator.clipboard.writeText(this.dataset.code).then(() => showToast())" title="Copy code">
+      <button class="copy-btn" data-code="${codeStr}" onclick="navigator.clipboard.writeText(this.dataset.code).then(()=>showToast())" title="Copy code">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="9" y="9" width="13" height="13" rx="2"/>
-          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
         </svg>
       </button>
       <div class="timer-wrap">
         <svg width="32" height="32" viewBox="0 0 32 32">
           <circle cx="16" cy="16" r="12" fill="none" stroke="var(--border)" stroke-width="2.5"/>
           <circle cx="16" cy="16" r="12" fill="none" stroke="${color}" stroke-width="2.5"
-            stroke-dasharray="${arc} 75.4" stroke-linecap="round"
-            transform="rotate(-90 16 16)" style="transition:stroke-dasharray 0.8s linear"/>
+            stroke-dasharray="${arc} 75.4" stroke-linecap="round" transform="rotate(-90 16 16)"
+            style="transition:stroke-dasharray 0.8s linear"/>
         </svg>
         <span class="timer-num">${rem}</span>
       </div>
@@ -790,7 +783,7 @@ function buildRow({ label, codeStr, codeSafe, rem, arc, color }) {
   `;
 }
 
-/* ── Keyboard shortcut ── */
+/* ── Keyboard: Ctrl/Cmd + Enter ── */
 document.getElementById('secretKeys').addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') generateCodes();
 });
