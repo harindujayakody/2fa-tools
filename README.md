@@ -24,7 +24,7 @@ No app. No server. No tracking. Just paste your secret key and get your code.
 
 <br/>
 
-<img width="680" alt="2FA.tools screenshot" src="https://raw.githubusercontent.com/harindujayakody/2fa-tools/main/screenshot.png"/>
+[<img width="680" alt="2FA.tools screenshot" src="https://harindujayakody.github.io/2fa-tools/screenshots/splash.png"/>](https://harindujayakody.github.io/2fa-tools/screenshots/splash.png)
 
 </div>
 
