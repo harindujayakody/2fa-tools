@@ -2,37 +2,45 @@
 <html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+
+<!-- PWA essentials -->
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="2FA.tools"/>
+<meta name="application-name" content="2FA.tools"/>
+<link rel="manifest" href="manifest.json"/>
 
 <!-- Primary Meta -->
-<title>2FA.tools — Free Online TOTP Code Generator</title>
-<meta name="title" content="2FA.tools — Free Online TOTP Code Generator"/>
-<meta name="description" content="Generate time-based 2FA codes instantly in your browser. Enter your secret key and get your TOTP code — no app needed, 100% private, nothing sent to any server."/>
-<meta name="keywords" content="2FA, TOTP, two-factor authentication, authenticator, OTP, one-time password, Google Authenticator, online 2FA generator"/>
+<title>2FA.tools — TOTP Code Generator</title>
+<meta name="description" content="Generate time-based 2FA codes instantly in your browser. 100% private — your secret key never leaves your device."/>
+<meta name="keywords" content="2FA, TOTP, two-factor authentication, OTP, authenticator, Google Authenticator"/>
 <meta name="author" content="Harindu Jayakody"/>
 <meta name="robots" content="index, follow"/>
-<meta name="theme-color" content="#ffffff" id="themeColorMeta"/>
+<meta name="theme-color" content="#111111" id="themeColorMeta"/>
 
 <!-- Open Graph -->
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://harindujayakody.github.io/2fa-tools/"/>
 <meta property="og:title" content="2FA.tools — Free Online TOTP Code Generator"/>
-<meta property="og:description" content="Generate time-based 2FA codes instantly in your browser. 100% private — your secret key never leaves your device."/>
+<meta property="og:description" content="Generate time-based 2FA codes instantly. 100% private, zero server."/>
 <meta property="og:image" content="https://harindujayakody.github.io/2fa-tools/og-image.png"/>
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:url" content="https://harindujayakody.github.io/2fa-tools/"/>
-<meta name="twitter:title" content="2FA.tools — Free Online TOTP Code Generator"/>
-<meta name="twitter:description" content="Generate time-based 2FA codes instantly in your browser. 100% private — your secret key never leaves your device."/>
-<meta name="twitter:image" content="https://harindujayakody.github.io/2fa-tools/og-image.png"/>
 <meta name="twitter:creator" content="@harindujayakody"/>
+<meta name="twitter:title" content="2FA.tools — TOTP Code Generator"/>
+<meta name="twitter:description" content="100% private browser-based 2FA code generator."/>
 
 <link rel="canonical" href="https://harindujayakody.github.io/2fa-tools/"/>
 
-<!-- Favicon (inline SVG, no external file needed) -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='14.5' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='21' width='11' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E"/>
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231a1a1a'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='14.5' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='21' width='11' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E"/>
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23111111'/%3E%3Crect x='7' y='8' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='14.5' width='18' height='3' rx='1.5' fill='white'/%3E%3Crect x='7' y='21' width='11' height='3' rx='1.5' fill='white'/%3E%3C/svg%3E"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23111111'/%3E%3Crect x='38' y='45' width='104' height='17' rx='8' fill='white'/%3E%3Crect x='38' y='82' width='104' height='17' rx='8' fill='white'/%3E%3Crect x='38' y='119' width='64' height='17' rx='8' fill='white'/%3E%3C/svg%3E"/>
+
+<!-- Splash screens (iOS) -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -40,6 +48,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 
 <style>
+/* ════════════════════════════════════
+   BASE RESET & TOKENS
+════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -48,22 +59,31 @@
   --bg-tertiary:    #efefed;
   --text:           #111111;
   --text-secondary: #666666;
-  --text-tertiary:  #999999;
-  --border:         rgba(0,0,0,0.09);
-  --border-hover:   rgba(0,0,0,0.18);
+  --text-tertiary:  #aaaaaa;
+  --border:         rgba(0,0,0,0.08);
+  --border-hover:   rgba(0,0,0,0.16);
   --accent:         #111111;
   --accent-text:    #ffffff;
   --green:          #1D9E75;
   --amber:          #BA7517;
   --red:            #E24B4A;
-  --nav-h:          60px;
+  --header-bg:      #ffffff;
+  --header-border:  rgba(0,0,0,0.08);
+
+  /* safe area for notch / home indicator */
+  --safe-top:       env(safe-area-inset-top, 0px);
+  --safe-bottom:    env(safe-area-inset-bottom, 0px);
+  --safe-left:      env(safe-area-inset-left, 0px);
+  --safe-right:     env(safe-area-inset-right, 0px);
+
+  --nav-h:          56px;
   --radius-sm:      6px;
   --radius-md:      10px;
   --radius-lg:      14px;
-  --shadow-sm:      0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.06);
   --font-sans:      'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono:      'JetBrains Mono', 'SF Mono', monospace;
-  --transition:     0.2s ease;
+  --ease:           0.2s ease;
 }
 
 [data-theme="dark"] {
@@ -77,7 +97,9 @@
   --border-hover:   rgba(255,255,255,0.16);
   --accent:         #f0f0f0;
   --accent-text:    #111111;
-  --shadow-sm:      0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --header-bg:      #111111;
+  --header-border:  rgba(255,255,255,0.07);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.3);
 }
 
 html { scroll-behavior: smooth; }
@@ -87,153 +109,327 @@ body {
   background: var(--bg-secondary);
   color: var(--text);
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  transition: background var(--transition), color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  transition: background var(--ease), color var(--ease);
 }
 
-/* ═══ STICKY HEADER ═══ */
+/* ════════════════════════════════════
+   SPLASH SCREEN
+════════════════════════════════════ */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #111111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#splash.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-icon {
+  width: 88px;
+  height: 88px;
+  background: #1e1e1e;
+  border-radius: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  animation: splashPop 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+@keyframes splashPop {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.splash-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.4px;
+  animation: splashFade 0.5s 0.2s ease both;
+}
+
+.splash-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 6px;
+  animation: splashFade 0.5s 0.35s ease both;
+}
+
+@keyframes splashFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.splash-loader {
+  margin-top: 48px;
+  width: 36px;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  animation: splashFade 0.4s 0.5s ease both;
+}
+
+.splash-loader-bar {
+  height: 100%;
+  background: rgba(255,255,255,0.6);
+  border-radius: 2px;
+  animation: loadBar 1.4s 0.6s ease forwards;
+  width: 0%;
+}
+
+@keyframes loadBar {
+  0%   { width: 0%; }
+  60%  { width: 80%; }
+  100% { width: 100%; }
+}
+
+.splash-credit {
+  position: absolute;
+  bottom: calc(24px + var(--safe-bottom));
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+  animation: splashFade 0.4s 0.6s ease both;
+  letter-spacing: 0.2px;
+}
+
+/* ════════════════════════════════════
+   INSTALL BANNER
+════════════════════════════════════ */
+#installBanner {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  animation: slideDown 0.3s ease;
+}
+
+#installBanner.show { display: flex; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.install-icon {
+  width: 36px; height: 36px; background: #111; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.install-text { flex: 1; min-width: 0; }
+.install-text strong { display: block; font-size: 13px; color: var(--text); font-weight: 600; }
+.install-text span   { font-size: 12px; color: var(--text-secondary); }
+
+.install-btn {
+  background: var(--accent); color: var(--accent-text);
+  border: none; border-radius: var(--radius-sm);
+  padding: 7px 14px; font-size: 12px; font-weight: 600;
+  cursor: pointer; font-family: var(--font-sans); white-space: nowrap;
+}
+
+.install-dismiss {
+  background: none; border: none; cursor: pointer; padding: 4px;
+  color: var(--text-tertiary); font-size: 18px; line-height: 1; flex-shrink: 0;
+}
+
+/* ════════════════════════════════════
+   STICKY HEADER (mobile-native feel)
+════════════════════════════════════ */
 header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  height: var(--nav-h);
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+  z-index: 200;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  padding-top: var(--safe-top);
+  transition: background var(--ease), border-color var(--ease), box-shadow var(--ease);
+  /* Force hardware acceleration for smooth iOS scroll */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: box-shadow;
 }
 
 header.scrolled {
-  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 1px 20px rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
 }
 
 [data-theme="dark"] header.scrolled {
   background: rgba(17,17,17,0.92);
-  box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 1px 20px rgba(0,0,0,0.5);
 }
 
-nav {
+.nav-inner {
   max-width: 640px;
   margin: 0 auto;
-  height: 100%;
+  height: var(--nav-h);
   padding: 0 16px;
+  padding-left: max(16px, var(--safe-left));
+  padding-right: max(16px, var(--safe-right));
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
-.logo {
-  display: flex; align-items: center; gap: 9px;
-  font-size: 15px; font-weight: 600; color: var(--text);
-  text-decoration: none; letter-spacing: -0.2px;
-}
+/* App-style large title (collapses on scroll) */
+.nav-title-area { display: flex; align-items: center; gap: 10px; }
 
-.logo-badge {
-  width: 30px; height: 30px;
+.logo-mark {
+  width: 32px; height: 32px;
   background: var(--accent);
-  border-radius: 8px;
+  border-radius: 9px;
   display: flex; align-items: center; justify-content: center;
-  transition: background var(--transition);
   flex-shrink: 0;
+  transition: background var(--ease);
 }
 
-.nav-actions { display: flex; align-items: center; gap: 8px; }
+.logo-mark svg { display: block; }
 
-.icon-btn {
-  width: 34px; height: 34px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  background: transparent;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-secondary);
-  transition: border-color var(--transition), background var(--transition), color var(--transition);
+.logo-text {
+  display: flex; flex-direction: column;
   text-decoration: none;
 }
 
-.icon-btn:hover {
+.logo-name {
+  font-size: 16px; font-weight: 600;
+  color: var(--text); letter-spacing: -0.3px;
+  line-height: 1.1;
+}
+
+.logo-sub {
+  font-size: 10.5px; color: var(--text-tertiary);
+  font-weight: 400; letter-spacing: 0.1px;
+  line-height: 1.1;
+}
+
+.nav-actions { display: flex; align-items: center; gap: 6px; }
+
+.icon-btn {
+  width: 36px; height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary);
+  transition: border-color var(--ease), background var(--ease), color var(--ease);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.icon-btn:hover, .icon-btn:focus-visible {
   border-color: var(--border-hover);
   color: var(--text);
   background: var(--bg-tertiary);
 }
 
-/* ═══ PAGE ═══ */
-.page { flex: 1; padding: 48px 16px 64px; }
-.container { max-width: 640px; margin: 0 auto; }
+.icon-btn:active { transform: scale(0.93); }
 
-/* ─── Hero ─── */
-.hero { margin-bottom: 36px; }
-
-.live-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 500; letter-spacing: 0.5px;
-  color: var(--text-secondary);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
+/* Status pill in header */
+.status-pill {
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 10px;
+  background: rgba(29,158,117,0.1);
+  border: 1px solid rgba(29,158,117,0.2);
   border-radius: 20px;
-  padding: 3px 10px;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  user-select: none;
+  font-size: 11px; font-weight: 500;
+  color: var(--green);
+  letter-spacing: 0.2px;
+  white-space: nowrap;
 }
 
-.live-dot {
-  width: 6px; height: 6px; border-radius: 50%;
+.status-dot {
+  width: 5px; height: 5px; border-radius: 50%;
   background: var(--green);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  50% { opacity: 0.3; }
 }
 
+/* ════════════════════════════════════
+   PAGE BODY
+════════════════════════════════════ */
+.page {
+  flex: 1;
+  padding: 32px 16px 40px;
+  padding-left: max(16px, var(--safe-left));
+  padding-right: max(16px, var(--safe-right));
+  padding-bottom: max(40px, calc(var(--safe-bottom) + 24px));
+}
+
+.container { max-width: 640px; margin: 0 auto; }
+
+/* Hero */
+.hero { margin-bottom: 28px; }
+
 h1 {
-  font-size: 30px; font-weight: 600;
+  font-size: 28px; font-weight: 600;
   color: var(--text); letter-spacing: -0.6px;
-  line-height: 1.2; margin-bottom: 8px;
+  line-height: 1.2; margin-bottom: 7px;
 }
 
 .subtitle {
-  font-size: 15px; color: var(--text-secondary);
-  font-weight: 400; max-width: 480px;
+  font-size: 14px; color: var(--text-secondary); line-height: 1.55;
 }
 
-/* ─── Card ─── */
+/* Card */
 .card {
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  padding: 24px;
+  padding: 20px;
   box-shadow: var(--shadow-sm);
-  margin-bottom: 14px;
-  transition: background var(--transition), border-color var(--transition);
+  margin-bottom: 12px;
+  transition: background var(--ease), border-color var(--ease);
 }
 
 .field-label {
-  display: block; font-size: 13px; font-weight: 500;
+  display: block; font-size: 12.5px; font-weight: 500;
   color: var(--text); margin-bottom: 8px;
 }
 
 textarea {
   width: 100%; font-size: 13px; font-family: var(--font-mono);
   border: 1px solid var(--border); border-radius: var(--radius-md);
-  padding: 12px 14px; color: var(--text); background: var(--bg-secondary);
-  resize: vertical; outline: none; line-height: 1.7; min-height: 100px;
-  transition: border-color var(--transition), background var(--transition);
+  padding: 11px 13px; color: var(--text); background: var(--bg-secondary);
+  resize: vertical; outline: none; line-height: 1.7; min-height: 96px;
+  transition: border-color var(--ease), background var(--ease);
+  -webkit-appearance: none;
 }
 textarea::placeholder { color: var(--text-tertiary); }
 textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 
 .hint {
-  font-size: 12px; color: var(--text-tertiary);
-  margin: 6px 0 20px;
-  display: flex; align-items: center; gap: 5px;
+  font-size: 11.5px; color: var(--text-tertiary);
+  margin: 5px 0 18px;
+  display: flex; align-items: center; gap: 4px;
 }
 
 .btn-row { display: flex; justify-content: flex-end; }
@@ -241,29 +437,31 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 .btn-primary {
   background: var(--accent); color: var(--accent-text);
   border: none; border-radius: var(--radius-md);
-  padding: 10px 20px; font-size: 13px; font-weight: 500;
+  padding: 11px 20px; font-size: 13.5px; font-weight: 600;
   cursor: pointer; font-family: var(--font-sans);
   display: flex; align-items: center; gap: 7px;
-  transition: opacity var(--transition), transform 0.1s;
+  transition: opacity var(--ease), transform 0.1s;
+  -webkit-tap-highlight-color: transparent;
+  letter-spacing: -0.1px;
 }
 .btn-primary:hover { opacity: 0.82; }
-.btn-primary:active { transform: scale(0.98); }
+.btn-primary:active { transform: scale(0.97); }
 
-/* ─── Results ─── */
+/* Results */
 #results { margin-bottom: 4px; }
 
 .result-row {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 14px 18px; border: 1px solid var(--border);
+  padding: 14px 16px; border: 1px solid var(--border);
   border-radius: var(--radius-md); margin-bottom: 10px;
-  background: var(--bg); gap: 12px; flex-wrap: wrap;
+  background: var(--bg); gap: 10px; flex-wrap: wrap;
   box-shadow: var(--shadow-sm);
-  transition: border-color var(--transition);
-  animation: slideIn 0.2s ease;
+  transition: border-color var(--ease);
+  animation: slideIn 0.22s ease;
 }
 
 @keyframes slideIn {
-  from { opacity: 0; transform: translateY(6px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -278,12 +476,12 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 }
 
 .key-label {
-  font-size: 12px; font-family: var(--font-mono);
+  font-size: 11.5px; font-family: var(--font-mono);
   color: var(--text-secondary);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 
-.code-area { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.code-area { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
 
 .code {
   font-size: 22px; font-family: var(--font-mono);
@@ -291,14 +489,15 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 }
 
 .copy-btn {
-  width: 30px; height: 30px;
+  width: 32px; height: 32px;
   border: 1px solid var(--border); border-radius: var(--radius-sm);
   background: var(--bg-secondary); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: border-color var(--transition), background var(--transition);
-  flex-shrink: 0;
+  transition: border-color var(--ease), background var(--ease), transform 0.1s;
+  flex-shrink: 0; -webkit-tap-highlight-color: transparent;
 }
 .copy-btn:hover { border-color: var(--border-hover); background: var(--bg-tertiary); }
+.copy-btn:active { transform: scale(0.9); }
 .copy-btn svg { stroke: var(--text-secondary); display: block; }
 
 .timer-wrap { position: relative; width: 32px; height: 32px; flex-shrink: 0; }
@@ -308,18 +507,18 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
   font-size: 9px; font-family: var(--font-mono); font-weight: 600; color: var(--text);
 }
 
-/* ─── Security note ─── */
+/* Security note */
 .security-note {
   display: flex; gap: 10px; align-items: flex-start;
-  padding: 12px 16px;
+  padding: 12px 14px;
   background: var(--bg-tertiary); border-radius: var(--radius-md);
   border: 1px solid var(--border); margin-top: 4px;
 }
 .security-note p { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
 
-/* ─── FAQ ─── */
-.faq-section { margin-top: 36px; }
-.faq-heading { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 16px; letter-spacing: -0.2px; }
+/* FAQ */
+.faq-section { margin-top: 32px; }
+.faq-heading { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 14px; letter-spacing: -0.2px; }
 
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-item:first-of-type { border-top: 1px solid var(--border); }
@@ -327,93 +526,81 @@ textarea:focus { border-color: var(--border-hover); background: var(--bg); }
 .faq-btn {
   width: 100%; display: flex; justify-content: space-between; align-items: center;
   background: none; border: none; cursor: pointer;
-  text-align: left; padding: 14px 0; font-family: var(--font-sans); gap: 16px;
+  text-align: left; padding: 13px 0; font-family: var(--font-sans); gap: 14px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.faq-q { font-size: 13.5px; font-weight: 500; color: var(--text); line-height: 1.4; }
+.faq-q { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.4; }
 
 .faq-chevron {
-  flex-shrink: 0; width: 18px; height: 18px; color: var(--text-tertiary);
-  transition: transform 0.2s ease, color 0.2s;
+  flex-shrink: 0; width: 17px; height: 17px; color: var(--text-tertiary);
+  transition: transform 0.22s ease, color 0.2s;
 }
 .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--text-secondary); }
 
 .faq-body {
   display: none; font-size: 13px; color: var(--text-secondary);
-  padding-bottom: 14px; line-height: 1.65; max-width: 92%;
+  padding-bottom: 13px; line-height: 1.65; max-width: 94%;
 }
 .faq-item.open .faq-body { display: block; }
 
-/* ═══ FOOTER ═══ */
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
 footer {
   border-top: 1px solid var(--border);
-  padding: 36px 16px 28px;
+  padding: 28px 16px;
+  padding-bottom: max(28px, calc(var(--safe-bottom) + 16px));
+  padding-left: max(16px, var(--safe-left));
+  padding-right: max(16px, var(--safe-right));
   background: var(--bg);
-  transition: border-color var(--transition), background var(--transition);
+  transition: border-color var(--ease), background var(--ease);
 }
 
 .footer-inner { max-width: 640px; margin: 0 auto; }
 
 .footer-credits-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 0.8px;
-  text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 14px;
+  font-size: 10.5px; font-weight: 600; letter-spacing: 0.8px;
+  text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 12px;
 }
 
 .footer-credits-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 28px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 24px;
 }
+@media (max-width: 420px) { .footer-credits-grid { grid-template-columns: 1fr; } }
 
-@media (max-width: 480px) {
-  .footer-credits-grid { grid-template-columns: 1fr; }
-}
-
-/* Creator card */
 .credit-card {
-  display: flex; align-items: center; gap: 12px;
-  padding: 14px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  text-decoration: none;
-  transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  display: flex; align-items: center; gap: 11px;
+  padding: 12px 14px;
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); text-decoration: none;
+  transition: border-color var(--ease), background var(--ease);
+  -webkit-tap-highlight-color: transparent;
 }
-.credit-card:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-tertiary);
-  box-shadow: var(--shadow-sm);
-}
+.credit-card:hover { border-color: var(--border-hover); background: var(--bg-tertiary); }
+.credit-card:active { transform: scale(0.98); }
 
 .avatar {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border);
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-tertiary); border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  font-size: 13px; font-weight: 600;
-  color: var(--text-secondary);
-  font-family: var(--font-sans);
+  flex-shrink: 0; font-size: 12px; font-weight: 600; color: var(--text-secondary);
 }
 
 .claude-avatar {
-  width: 38px; height: 38px; border-radius: 10px;
-  background: #D97706;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  width: 36px; height: 36px; border-radius: 9px; background: #D97706;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 
 .credit-info { min-width: 0; }
-.credit-name { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.credit-sub  { font-size: 11px; color: var(--text-tertiary); margin-top: 2px; }
+.credit-name { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.credit-sub  { font-size: 10.5px; color: var(--text-tertiary); margin-top: 1px; }
 
-/* Footer bottom bar */
 .footer-bottom {
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
+  padding-top: 18px; border-top: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  flex-wrap: wrap; gap: 10px;
+  flex-wrap: wrap; gap: 8px;
 }
 
 .footer-made {
@@ -425,7 +612,6 @@ footer {
   color: var(--red); display: inline-block;
   animation: heartbeat 1.4s ease infinite;
 }
-
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
   14%       { transform: scale(1.3); }
@@ -434,61 +620,120 @@ footer {
   56%       { transform: scale(1); }
 }
 
-.footer-links { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.footer-links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
 .footer-link {
   font-size: 12px; color: var(--text-tertiary); text-decoration: none;
-  display: flex; align-items: center; gap: 4px;
-  transition: color var(--transition);
+  display: flex; align-items: center; gap: 4px; transition: color var(--ease);
 }
 .footer-link:hover { color: var(--text-secondary); }
-
 .footer-dot { color: var(--text-tertiary); font-size: 10px; }
 
-/* ─── Toast ─── */
+/* ════════════════════════════════════
+   TOAST
+════════════════════════════════════ */
 .toast {
-  position: fixed; bottom: 28px; left: 50%;
-  transform: translateX(-50%) translateY(8px);
+  position: fixed; bottom: calc(28px + var(--safe-bottom)); left: 50%;
+  transform: translateX(-50%) translateY(10px);
   background: var(--text); color: var(--accent-text);
   font-size: 13px; font-weight: 500;
   padding: 9px 22px; border-radius: 30px;
   opacity: 0; transition: opacity 0.25s, transform 0.25s;
   pointer-events: none; white-space: nowrap;
   font-family: var(--font-sans);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-  z-index: 200;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  z-index: 500;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ─── Responsive ─── */
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
 @media (max-width: 480px) {
-  h1 { font-size: 24px; }
-  .code { font-size: 18px; }
-  .card { padding: 18px; }
-  nav { padding: 0 12px; }
+  h1 { font-size: 22px; }
+  .code { font-size: 19px; letter-spacing: 3px; }
+  .card { padding: 16px; }
+  .logo-sub { display: none; }
+  .status-pill span { display: none; } /* keep dot, hide text on very small */
+}
+
+@media (min-width: 640px) {
+  h1 { font-size: 30px; }
+  .page { padding-top: 44px; }
+  .card { padding: 24px; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══ STICKY HEADER ═══ -->
+<!-- ════════════════════════════════════
+     SPLASH SCREEN
+════════════════════════════════════ -->
+<div id="splash" role="status" aria-label="Loading 2FA.tools">
+  <div class="splash-icon">
+    <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+      <rect x="6" y="10" width="36" height="6" rx="3" fill="white"/>
+      <rect x="6" y="21" width="36" height="6" rx="3" fill="white"/>
+      <rect x="6" y="32" width="22" height="6" rx="3" fill="white"/>
+    </svg>
+  </div>
+  <p class="splash-name">2FA.tools</p>
+  <p class="splash-tagline">Your codes, your browser, your privacy</p>
+  <div class="splash-loader"><div class="splash-loader-bar"></div></div>
+  <p class="splash-credit">by Harindu Jayakody · Built with Claude Sonnet 4.6</p>
+</div>
+
+<!-- ════════════════════════════════════
+     INSTALL BANNER
+════════════════════════════════════ -->
+<div id="installBanner" role="banner">
+  <div class="install-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5"/>
+      <path d="M7 8h10M7 12h10M7 16h6"/>
+    </svg>
+  </div>
+  <div class="install-text">
+    <strong>Install 2FA.tools</strong>
+    <span>Add to home screen for offline access</span>
+  </div>
+  <button class="install-btn" id="installBtn">Install</button>
+  <button class="install-dismiss" id="dismissBanner" aria-label="Dismiss">×</button>
+</div>
+
+<!-- ════════════════════════════════════
+     STICKY HEADER
+════════════════════════════════════ -->
 <header id="siteHeader">
-  <nav>
-    <a class="logo" href="#">
-      <div class="logo-badge">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <div class="nav-inner">
+    <div class="nav-title-area">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5"/>
           <path d="M7 8h10M7 12h10M7 16h6"/>
         </svg>
       </div>
-      2FA.tools
-    </a>
+      <a class="logo-text" href="#">
+        <span class="logo-name">2FA.tools</span>
+        <span class="logo-sub">TOTP Generator</span>
+      </a>
+    </div>
+
     <div class="nav-actions">
-      <a class="icon-btn" href="https://github.com/harindujayakody/2fa-tools" target="_blank" rel="noopener" title="View on GitHub" aria-label="GitHub">
+      <!-- Online status pill -->
+      <div class="status-pill" id="statusPill">
+        <span class="status-dot"></span>
+        <span>Private</span>
+      </div>
+
+      <!-- GitHub -->
+      <a class="icon-btn" href="https://github.com/harindujayakody/2fa-tools" target="_blank" rel="noopener" title="GitHub" aria-label="View on GitHub">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
         </svg>
       </a>
+
+      <!-- Theme toggle -->
       <button class="icon-btn" id="themeToggle" onclick="toggleTheme()" title="Toggle theme" aria-label="Toggle dark/light mode">
         <svg id="iconSun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
           <circle cx="12" cy="12" r="5"/>
@@ -502,25 +747,26 @@ footer {
         </svg>
       </button>
     </div>
-  </nav>
+  </div>
 </header>
 
-<!-- ═══ MAIN PAGE ═══ -->
+<!-- ════════════════════════════════════
+     MAIN PAGE
+════════════════════════════════════ -->
 <div class="page">
 <div class="container">
 
   <div class="hero">
-    <div class="live-badge"><span class="live-dot"></span>100% local · no server</div>
     <h1>Get 2FA codes<br>in seconds</h1>
-    <p class="subtitle">Enter your secret key and instantly generate a time-based one-time password — right in your browser.</p>
+    <p class="subtitle">Enter your secret key and instantly generate a time-based one-time password — right in your browser. No app needed.</p>
   </div>
 
   <div class="card">
     <label class="field-label" for="secretKeys">Enter 2FA secret keys</label>
-    <textarea id="secretKeys" rows="4" placeholder="NATJHQ2EMKEL6ZSHWXKQGOSM6B7YSFQ&#10;JBSWY3DPEHPK3PXP&#10;&#10;One key per line → one code per key"></textarea>
+    <textarea id="secretKeys" rows="4" placeholder="NATJHQ2EMKEL6ZSHWXKQGOSM6B7YSFQ&#10;JBSWY3DPEHPK3PXP&#10;&#10;One key per line → one code per key" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
     <p class="hint">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      Each key on a separate line. Press Ctrl+Enter to generate.
+      One key per line. Ctrl+Enter to generate.
     </p>
     <div class="btn-row">
       <button class="btn-primary" onclick="generateCodes()">
@@ -538,7 +784,7 @@ footer {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="flex-shrink:0;margin-top:2px;color:var(--green)">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     </svg>
-    <p>Your secret key <strong>never leaves your device</strong>. All TOTP computation happens locally using the browser's native Web Crypto API — nothing is transmitted to any server.</p>
+    <p>Your secret key <strong>never leaves your device</strong>. All TOTP computation happens locally using the browser's native Web Crypto API.</p>
   </div>
 
   <div class="faq-section">
@@ -549,14 +795,13 @@ footer {
 </div>
 </div>
 
-<!-- ═══ FOOTER ═══ -->
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
-
     <p class="footer-credits-label">Credits</p>
     <div class="footer-credits-grid">
-
-      <!-- Creator -->
       <a class="credit-card" href="https://github.com/harindujayakody" target="_blank" rel="noopener" aria-label="Harindu Jayakody">
         <div class="avatar">HJ</div>
         <div class="credit-info">
@@ -564,11 +809,9 @@ footer {
           <p class="credit-sub">Creator &amp; Developer</p>
         </div>
       </a>
-
-      <!-- Claude -->
       <a class="credit-card" href="https://www.anthropic.com/claude" target="_blank" rel="noopener" aria-label="Claude Sonnet 4.6 by Anthropic">
         <div class="claude-avatar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none">
             <path d="M12 3L4 7.5V16.5L12 21L20 16.5V7.5L12 3Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"/>
             <path d="M4 7.5L12 12L20 7.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
             <line x1="12" y1="12" x2="12" y2="21" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
@@ -579,50 +822,49 @@ footer {
           <p class="credit-sub">Built with AI · Anthropic</p>
         </div>
       </a>
-
     </div>
-
-    <!-- Bottom bar -->
     <div class="footer-bottom">
-      <p class="footer-made">
-        Made with <span class="heart">♥</span>&nbsp;for the open-source community
-      </p>
+      <p class="footer-made">Made with <span class="heart">♥</span>&nbsp;for everyone</p>
       <div class="footer-links">
         <a class="footer-link" href="https://github.com/harindujayakody/2fa-tools" target="_blank" rel="noopener">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
           </svg>
           GitHub
         </a>
         <span class="footer-dot">·</span>
-        <a class="footer-link" href="https://github.com/harindujayakody/2fa-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a>
+        <a class="footer-link" href="https://github.com/harindujayakody/2fa-tools/blob/main/LICENSE" target="_blank" rel="noopener">MIT</a>
         <span class="footer-dot">·</span>
-        <span style="font-size:12px;color:var(--text-tertiary)">No cookies · No tracking</span>
+        <span style="font-size:11px;color:var(--text-tertiary)">No cookies</span>
       </div>
     </div>
-
   </div>
 </footer>
 
 <div class="toast" id="toast">Copied!</div>
 
 <script>
-/* ── Theme init (before paint) ── */
+/* ────────────────────────────
+   THEME — runs before paint
+──────────────────────────── */
 (function () {
   const saved = localStorage.getItem('theme');
   const dark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = saved || (dark ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
-  syncThemeIcon(theme);
+  updateThemeMeta(theme);
+  syncIcons(theme);
 })();
 
-function syncThemeIcon(theme) {
+function syncIcons(theme) {
   const sun  = document.getElementById('iconSun');
   const moon = document.getElementById('iconMoon');
+  if (sun)  sun.style.display  = theme === 'dark' ? 'block' : 'none';
+  if (moon) moon.style.display = theme === 'dark' ? 'none'  : 'block';
+}
+
+function updateThemeMeta(theme) {
   const meta = document.getElementById('themeColorMeta');
-  if (!sun || !moon) return;
-  sun.style.display  = theme === 'dark' ? 'block' : 'none';
-  moon.style.display = theme === 'dark' ? 'none'  : 'block';
   if (meta) meta.content = theme === 'dark' ? '#111111' : '#ffffff';
 }
 
@@ -630,28 +872,90 @@ function toggleTheme() {
   const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
-  syncThemeIcon(next);
+  syncIcons(next);
+  updateThemeMeta(next);
 }
 
-/* ── Sticky header shadow on scroll ── */
+/* ────────────────────────────
+   SPLASH SCREEN
+──────────────────────────── */
+window.addEventListener('load', () => {
+  // Minimum 1.6 s so the animation feels intentional
+  setTimeout(() => {
+    const splash = document.getElementById('splash');
+    if (splash) splash.classList.add('hide');
+  }, 1600);
+});
+
+/* ────────────────────────────
+   STICKY HEADER SCROLL SHADOW
+──────────────────────────── */
 window.addEventListener('scroll', () => {
-  document.getElementById('siteHeader').classList.toggle('scrolled', window.scrollY > 4);
+  document.getElementById('siteHeader')
+    .classList.toggle('scrolled', window.scrollY > 2);
 }, { passive: true });
 
-/* ── FAQ ── */
+/* ────────────────────────────
+   SERVICE WORKER (PWA)
+──────────────────────────── */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('[SW] Registered:', reg.scope))
+      .catch(err => console.warn('[SW] Failed:', err));
+  });
+}
+
+/* ────────────────────────────
+   PWA INSTALL BANNER
+──────────────────────────── */
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Only show if user hasn't dismissed before
+  if (!localStorage.getItem('installDismissed')) {
+    setTimeout(() => document.getElementById('installBanner').classList.add('show'), 2000);
+  }
+});
+
+document.getElementById('installBtn').addEventListener('click', () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(r => {
+    deferredPrompt = null;
+    document.getElementById('installBanner').classList.remove('show');
+    if (r.outcome === 'accepted') showToast('App installed!');
+  });
+});
+
+document.getElementById('dismissBanner').addEventListener('click', () => {
+  document.getElementById('installBanner').classList.remove('show');
+  localStorage.setItem('installDismissed', '1');
+});
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').classList.remove('show');
+  showToast('2FA.tools installed!');
+});
+
+/* ────────────────────────────
+   FAQ
+──────────────────────────── */
 const faqs = [
   ["How can I get a 2FA code online?",
-   "Paste your Base32 secret key (provided when you set up 2FA on any service) into the input above and click <em>Get 2FA codes</em>. Your 6-digit TOTP code is generated instantly, refreshing every 30 seconds."],
+   "Paste your Base32 secret key (provided when you set up 2FA on any service) into the input above and tap <em>Get 2FA codes</em>. Your 6-digit TOTP code is generated instantly, refreshing every 30 seconds."],
   ["Can I use this for Facebook 2FA?",
    "Yes. Facebook provides a secret key during 2FA setup. Enter that key here to generate your current code without needing a separate authenticator app."],
   ["Does this work with Google 2FA?",
-   "Absolutely. Google Authenticator uses the standard TOTP (RFC 6238) protocol. Any secret key from Google or any TOTP-compatible service works perfectly here."],
-  ["What is 2FA authentication, and why is it important?",
+   "Absolutely. Google Authenticator uses the standard TOTP (RFC 6238) protocol. Any secret key from Google or any TOTP-compatible service works here."],
+  ["What is 2FA, and why is it important?",
    "Two-factor authentication (2FA) adds a second verification step beyond your password. Even if your password is stolen, an attacker still can't log in without your rotating time-based code."],
-  ["Can I generate 2FA codes for multiple accounts?",
-   "Yes — paste one secret key per line in the text area. Each key gets its own live code with an individual countdown timer."],
-  ["Is this a 2FA authenticator app?",
-   "It's a browser-based TOTP generator. No installation needed. Everything runs locally using the Web Crypto API — your keys never leave your device."],
+  ["Can I generate codes for multiple accounts?",
+   "Yes — paste one secret key per line. Each key gets its own live code with an individual countdown timer."],
+  ["Does this work offline?",
+   "Yes! Install it as an app (use the Install button) and it works fully offline — no internet required after the first load."],
 ];
 
 const faqEl = document.getElementById('faq');
@@ -668,15 +972,19 @@ faqs.forEach(([q, a]) => {
   faqEl.appendChild(item);
 });
 
-/* ── Toast ── */
+/* ────────────────────────────
+   TOAST
+──────────────────────────── */
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg || 'Copied!';
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 1800);
+  setTimeout(() => t.classList.remove('show'), 2000);
 }
 
-/* ── TOTP (RFC 6238) ── */
+/* ────────────────────────────
+   TOTP — RFC 6238
+──────────────────────────── */
 function base32ToBytes(b32) {
   const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
   const s = b32.toUpperCase().replace(/[\s=\-]/g, '');
@@ -684,7 +992,7 @@ function base32ToBytes(b32) {
   const out = [];
   for (const c of s) {
     const idx = alpha.indexOf(c);
-    if (idx < 0) throw new Error('Invalid character: ' + c);
+    if (idx < 0) throw new Error('Invalid: ' + c);
     val = (val << 5) | idx;
     bits += 5;
     if (bits >= 8) { out.push((val >>> (bits - 8)) & 0xff); bits -= 8; }
@@ -698,14 +1006,16 @@ async function totp(secret) {
   const c  = BigInt(Math.floor(now / 30));
   const cb = new Uint8Array(8);
   for (let i = 7; i >= 0; i--) cb[i] = Number((c >> BigInt((7 - i) * 8)) & 0xffn);
-  const key = await crypto.subtle.importKey('raw', keyBytes, { name: 'HMAC', hash: 'SHA-1' }, false, ['sign']);
+  const key = await crypto.subtle.importKey('raw', keyBytes, { name:'HMAC', hash:'SHA-1' }, false, ['sign']);
   const sig = new Uint8Array(await crypto.subtle.sign('HMAC', key, cb));
   const off = sig[19] & 0x0f;
   const code = (((sig[off] & 0x7f) << 24) | (sig[off+1] << 16) | (sig[off+2] << 8) | sig[off+3]) % 1_000_000;
   return { code: String(code).padStart(6, '0'), remaining: 30 - (now % 30) };
 }
 
-/* ── Render engine ── */
+/* ────────────────────────────
+   RENDER ENGINE
+──────────────────────────── */
 let ticker = null;
 
 async function generateCodes() {
@@ -725,7 +1035,7 @@ async function renderAll(keys, force) {
     let codeStr = '------', rem = 30;
     try { ({ code: codeStr, remaining: rem } = await totp(key)); } catch(e) {}
     const clean = key.replace(/[\s=\-]/g, '');
-    const label = clean.length > 30 ? clean.slice(0, 30) + '…' : clean;
+    const label = clean.length > 28 ? clean.slice(0,28)+'…' : clean;
     const arc   = ((rem / 30) * 75.4).toFixed(1);
     const color = rem <= 5 ? '#E24B4A' : rem <= 10 ? '#BA7517' : '#1D9E75';
     rows.push({ label, codeStr, rem, arc, color });
@@ -745,11 +1055,14 @@ async function renderAll(keys, force) {
   const els = res.querySelectorAll('.result-row');
   rows.forEach((r, i) => {
     if (!els[i]) return;
-    els[i].querySelector('.code').textContent       = r.codeStr.slice(0,3) + ' ' + r.codeStr.slice(3);
-    els[i].querySelector('.copy-btn').dataset.code  = r.codeStr;
-    els[i].querySelector('.timer-num').textContent  = r.rem;
+    els[i].querySelector('.code').textContent      = r.codeStr.slice(0,3) + ' ' + r.codeStr.slice(3);
+    els[i].querySelector('.copy-btn').dataset.code = r.codeStr;
+    els[i].querySelector('.timer-num').textContent = r.rem;
     const ring = els[i].querySelectorAll('circle')[1];
-    if (ring) { ring.setAttribute('stroke-dasharray', r.arc + ' 75.4'); ring.setAttribute('stroke', r.color); }
+    if (ring) {
+      ring.setAttribute('stroke-dasharray', r.arc + ' 75.4');
+      ring.setAttribute('stroke', r.color);
+    }
   });
 }
 
@@ -765,7 +1078,7 @@ function buildRow({ label, codeStr, rem, arc, color }) {
     </div>
     <div class="code-area">
       <span class="code">${codeStr.slice(0,3)} ${codeStr.slice(3)}</span>
-      <button class="copy-btn" data-code="${codeStr}" onclick="navigator.clipboard.writeText(this.dataset.code).then(()=>showToast())" title="Copy code">
+      <button class="copy-btn" data-code="${codeStr}" onclick="navigator.clipboard.writeText(this.dataset.code).then(()=>showToast('Copied!'))" title="Copy code">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
         </svg>
@@ -775,7 +1088,7 @@ function buildRow({ label, codeStr, rem, arc, color }) {
           <circle cx="16" cy="16" r="12" fill="none" stroke="var(--border)" stroke-width="2.5"/>
           <circle cx="16" cy="16" r="12" fill="none" stroke="${color}" stroke-width="2.5"
             stroke-dasharray="${arc} 75.4" stroke-linecap="round" transform="rotate(-90 16 16)"
-            style="transition:stroke-dasharray 0.8s linear"/>
+            style="transition:stroke-dasharray 0.9s linear"/>
         </svg>
         <span class="timer-num">${rem}</span>
       </div>
@@ -783,7 +1096,7 @@ function buildRow({ label, codeStr, rem, arc, color }) {
   `;
 }
 
-/* ── Keyboard: Ctrl/Cmd + Enter ── */
+/* Keyboard: Ctrl/Cmd + Enter */
 document.getElementById('secretKeys').addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') generateCodes();
 });
