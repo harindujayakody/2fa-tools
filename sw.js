@@ -1,5 +1,5 @@
-/* 2FA.tools Service Worker v1.0 */
-const CACHE = '2fa-tools-v1';
+/* 2FA.tools Service Worker v2.0 */
+const CACHE = '2fa-tools-v2';
 const ASSETS = [
   '/2fa-tools/',
   '/2fa-tools/index.html',
