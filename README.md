@@ -1,3 +1,5 @@
+> **Moved:** the 2FA code generator now lives at [harindujayakody.com/free-tools/2fa-online/](https://harindujayakody.com/free-tools/2fa-online/). The old GitHub Pages URL redirects there. The original single-file app is kept in the git history.
+
 <div align="center">
 
 <img src="https://img.shields.io/badge/2FA.tools-Online%20TOTP%20Generator-black?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNCAyNCcgZmlsbD0nbm9uZScgc3Ryb2tlPSd3aGl0ZScgc3Ryb2tlLXdpZHRoPScyJyBzdHJva2UtbGluZWNhcD0ncm91bmQnPjxyZWN0IHg9JzInIHk9JzInIHdpZHRoPScyMCcgaGVpZ2h0PScyMCcgcng9JzUnLz48cGF0aCBkPSdNNyA4aDEwTTcgMTJoMTBNNyAxNmg2Jy8+PC9zdmc+" alt="2FA.tools"/>
